@@ -1,0 +1,65 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing / coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# Ruff
+.ruff_cache/
+
+# Environment
+.env
+.env.local
+*.local
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Profiling
+*.prof
+profile.stats
+*.stats
+
+# Logs
+*.log
+logs/
+
+# Optional: uncomment to ignore generated model (keep if you commit it)
+# models/*.onnx
