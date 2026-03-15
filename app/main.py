@@ -8,6 +8,8 @@ from app.logging_config import configure_logging, get_logger
 from app.middleware import RequestLoggingMiddleware
 from app.metrics import setup_metrics
 
+from fastapi import HTTPException
+
 logger = get_logger(__name__)
 
 
@@ -84,3 +86,106 @@ async def predict(body: dict):
         from fastapi import HTTPException
 
         raise HTTPException(status_code=503, detail="Model not loaded")
+
+
+
+@app.post("/add")
+async def add(body: dict):
+    """Add two numbers."""
+    
+    input1 = body.get("input1")
+    input2 = body.get("input2")
+    
+    if input1 is None or input2 is None:
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' are required",
+        )
+
+    # Check types: only int or float allowed
+    if not isinstance(input1, (int, float)) or not isinstance(input2, (int, float)):
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' must be numbers (int or float)",
+        )
+
+    return {"result": input1 + input2}
+
+
+@app.post("/sub")
+async def sub(body: dict):
+    """Subtract two numbers."""
+    input1 = body.get("input1")
+    input2 = body.get("input2")
+    if input1 is None or input2 is None:
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' are required",
+        )
+    if not isinstance(input1, (int, float)) or not isinstance(input2, (int, float)):
+        raise HTTPException(
+            status_code=400,    
+            detail="'input1' and 'input2' must be numbers (int or float)",
+        )
+    return {"result": input1 - input2}
+
+
+@app.post("/multiply")
+async def sub(body: dict):
+    """Subtract two numbers."""
+    input1 = body.get("input1")
+    input2 = body.get("input2")
+    if input1 is None or input2 is None:
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' are required",
+        )
+    if not isinstance(input1, (int, float)) or not isinstance(input2, (int, float)):
+        raise HTTPException(
+            status_code=400,    
+            detail="'input1' and 'input2' must be numbers (int or float)",
+        )
+    return {"result": input1 * input2}
+
+
+@app.post("/div")
+async def div(body: dict):
+    """Divide two numbers."""
+    input1 = body.get("input1")
+    input2 = body.get("input2")
+    if input1 is None or input2 is None:
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' are required",
+        )
+
+    if input2 == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot divide by zero",
+        )
+
+    if not isinstance(input1, (int, float)) or not isinstance(input2, (int, float)):
+        raise HTTPException(
+            status_code=400,    
+            detail="'input1' and 'input2' must be numbers (int or float)",
+        )
+    return {"result": input1 / input2}
+
+
+@app.post("/avg")
+async def avg(body: dict):
+    """Divide two numbers."""
+    input1 = body.get("input1")
+    input2 = body.get("input2")
+    if input1 is None or input2 is None:
+        raise HTTPException(
+            status_code=400,
+            detail="'input1' and 'input2' are required",
+        )
+    if not isinstance(input1, (int, float)) or not isinstance(input2, (int, float)):
+        raise HTTPException(
+            status_code=400,    
+            detail="'input1' and 'input2' must be numbers (int or float)",
+        )
+    return {"result": (input1 + input2) / 2}
